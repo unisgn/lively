@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="lively:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="nova.war">
+      <element id="artifact" artifact-name="lively:war exploded" />
+    </root>
+  </artifact>
+</component>
