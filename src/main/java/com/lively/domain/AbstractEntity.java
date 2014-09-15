@@ -7,4 +7,8 @@ import javax.persistence.MappedSuperclass;
  */
 @MappedSuperclass
 public abstract class AbstractEntity {
+
+    private int version;
+    private boolean archived;
+    private boolean active;
 }
