@@ -93,6 +93,14 @@
     </dependency>
 
 
+  <!-- spring data jpa -->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>1.7.0.RELEASE</version>
+    </dependency>
+
+
     <!-- hibernate /JPA-->
     <dependency>
       <groupId>org.hibernate</groupId>
