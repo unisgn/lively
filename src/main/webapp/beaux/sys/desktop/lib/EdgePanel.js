@@ -3,7 +3,7 @@
     
     initComponent: function() {
         var me = this;
-        
+
         me.callParent();
     }
     

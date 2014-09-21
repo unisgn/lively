@@ -1,6 +1,8 @@
 ﻿Ext.define('Beaux.sys.desktop.RootXWindow', {
     extend: 'Beaux.sys.xserver.RootXWindow',
 
+
+
     /**
      ***************************************************************************
      *                             configuration
@@ -37,7 +39,7 @@
             id: 'desk'
             
         }];
-        
+
         var global_shortcuts = Ext.create('Ext.util.KeyMap', {
             target: Ext.getBody(),
             binding: {

@@ -2,7 +2,8 @@ Ext.define('Beaux.sys.desktop.Cassie', {
 
     singleton: true,
     requires: [
-        'Beaux.sys.xserver.XServer'
+        'Beaux.sys.xserver.XServer',
+        'Beaux.sys.desktop.RootXWindow'
     ],
     
     /**

@@ -326,25 +326,25 @@
      * @private
      *
      */
-    initSimpleDraggable: function() {
-        var me = this;
-        me.callParent();
-        if(me.dd) {
-            // override {@link Ext.util.ComponentDragger.onDrag()};
-            me.dd.onDrag = function(e) {
-                var _offset = me.dd.getOffset(),
-                    _deskRegion = me.desk.getRegion(),
-                    endXY = [me.dd.startPosition[0] + _offset[0], me.dd.startPosition[1] + _offset[1]];
-                // adjust offset;
-                if(endXY[1] < _deskRegion.top) {
-                    endXY[1] = _deskRegion.top;
-                } else if(endXY[1] > _deskRegion.bottom - me.header.getHeight()) {
-                    endXY[1] = _deskRegion.bottom - me.header.getHeight();
-                }
-
-                me.setPagePosition(endXY[0], endXY[1]);
-            };
-        }
-    }
+//    initSimpleDraggable: function() {
+//        var me = this;
+//        me.callParent();
+//        if(me.dd) {
+//            // override {@link Ext.util.ComponentDragger.onDrag()};
+//            me.dd.onDrag = function(e) {
+//                var _offset = me.dd.getOffset(),
+//                    _deskRegion = me.desk.getRegion(),
+//                    endXY = [me.dd.startPosition[0] + _offset[0], me.dd.startPosition[1] + _offset[1]];
+//                // adjust offset;
+//                if(endXY[1] < _deskRegion.top) {
+//                    endXY[1] = _deskRegion.top;
+//                } else if(endXY[1] > _deskRegion.bottom - me.header.getHeight()) {
+//                    endXY[1] = _deskRegion.bottom - me.header.getHeight();
+//                }
+//
+//                me.setPagePosition(endXY[0], endXY[1]);
+//            };
+//        }
+//    }
 
 });

@@ -1,8 +1,0 @@
-//reference: https://blogs.oracle.com/foo/entry/how_to_run_glassfish_v3
-
-1, cd /etc/init.d
-2, cp glassfish /etc/init.d
-3, update-rc.d glassfish defaults
-done.
-
-remove tomcat6, apache2 auto start in /etc/rc2.d
