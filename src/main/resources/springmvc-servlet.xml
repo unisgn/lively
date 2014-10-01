@@ -94,6 +94,8 @@
   -->
 
   <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+  <!--prefix JSP前缀，一般为文件夹-->
+  <!--suffix JSP前缀，一般为.jsp-->
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
         p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
 

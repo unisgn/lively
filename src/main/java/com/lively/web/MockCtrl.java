@@ -14,7 +14,7 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping(value = "/demo")
+@RequestMapping(value = "/mock")
 public class MockCtrl {
     @RequestMapping(method = RequestMethod.GET, value = "/view")
     @ResponseBody

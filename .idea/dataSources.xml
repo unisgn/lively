@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="3550837445">
+  <component name="DataSourceManagerImpl" format="xml" hash="3881805176">
     <data-source source="LOCAL" name="nova.jpa" uuid="5ba5f5e7-14da-4a7a-a9a7-f6f62a9441a6">
       <driver-ref>mysql</driver-ref>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
@@ -12,6 +12,15 @@
           <url>file://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar</url>
         </library>
       </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="PostgreSQL - nova@localhost" uuid="cf792543-79da-459e-bf66-0a35fbdc08c3">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/nova</jdbc-url>
+      <user-name>demo</user-name>
+      <user-password>dfcbdfcedfc7dfc3dfc4</user-password>
+      <libraries />
     </data-source>
   </component>
 </project>

@@ -7,12 +7,13 @@
 
 
   <persistence-unit name="nova.jpa" >
-    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <properties>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
-      <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/nova" />
-      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-      <property name="hibernate.connection.username" value="root" />
+      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect" />
+      <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/nova" />
+      <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
+      <property name="hibernate.connection.username" value="demo" />
       <property name="hibernate.connection.password" value="admin" />
       <property name="hibernate.hbm2ddl.auto" value="update" />
       <property name="hibernate.show_sql" value="true" />
