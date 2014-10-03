@@ -1,5 +1,5 @@
 Ext.define('Jeeper.apps.account.XWindow', {
-    extend: 'Beaux.sys.desktop.lib.XWindow',
+    extend: 'Beaux.sys.lib.cassie.XWindow',
     requires: ['Jeeper.model.FinancialAccount'],
     title: '会计科目表',
     //width: 800,

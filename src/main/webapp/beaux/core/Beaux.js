@@ -1,29 +1,27 @@
-Ext.define('Beaux.core.Beaux', {
-    singleton: true,
-    requires: [
-        'Beaux.sys.login.LoginManager',
-        'Beaux.sys.desktop.Cassie',
-        'Beaux.sys.xserver.XServer',
-        'Beaux.sys.application.ProcessManager'
-    ],
-    xserver: null,
-    loginManager : null,
-    
-    setLoginManager : function(loginManager) {
-        this.loginManager = loginManager;
-    },
-    getLoginManager : function() {
-        return this.loginManager;
-    },
-    
-    main: function() {
-        console.log('start beaux;');
-        Beaux.sys.xserver.XServer.main(); // prepare Xserver
+(function () {
+    var desktop;
+    var loginMgr;
+    var xserver;
+    var processMgr = Ext.create('Beaux.core.ProcMgr');
 
-        
-        //Beaux.sys.login.LoginManager.main(); // launch login mgr
+    Beaux.getDesktop = function () {
+        return desktop;
+    };
 
-        Beaux.sys.desktop.Cassie.main(); 
-        console.log('beaux is ready;');
-    }
-});
+    Beaux.setDesktop = function (_desktop) {
+        desktop = _desktop;
+    };
+
+    Beaux.getLoginMgr = function () {
+        return loginMgr;
+    };
+
+    Beaux.setLoginMgr = function (_loginMgr) {
+        loginMgr = _loginMgr;
+    };
+
+    Beaux.getProcessMgr = function () {
+        return processMgr;
+    };
+
+}());

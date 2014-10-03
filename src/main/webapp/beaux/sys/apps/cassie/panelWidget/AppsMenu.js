@@ -1,9 +1,7 @@
-﻿Ext.define('Beaux.sys.desktop.panelWidget.AppsMenu', {
-    extend: 'Beaux.sys.desktop.lib.PanelWidget',
+﻿Ext.define('Beaux.sys.apps.cassie.panelWidget.AppsMenu', {
+    extend: 'Beaux.sys.lib.cassie.PanelWidget',
     requires: [
-        'Beaux.sys.application.Application',
-        'Beaux.sys.application.ApplicationManager',
-        'Beaux.sys.desktop.lib.XWindow'
+        'Beaux.sys.lib.ApplicationLauncher'
     ],
 
 
@@ -18,7 +16,7 @@
 
     initComponent: function() {
         var me = this;
-        var appMgr = me.getApplicationManager();
+        var appMgr = me.getApplicationLauncher();
         me.items = [
             Ext.create('Ext.toolbar.Toolbar', {
                 items: [{
@@ -67,7 +65,7 @@
 
     },
 
-    getApplicationManager: function() {
-        return Beaux.sys.application.ApplicationManager;
+    getApplicationLauncher: function() {
+        return Beaux.sys.lib.ApplicationLauncher;
     }
 });

@@ -1,4 +1,4 @@
-﻿Ext.define('Beaux.sys.desktop.lib.PanelWidget', {
+﻿Ext.define('Beaux.sys.lib.cassie.PanelWidget', {
     extend: 'Ext.container.Container',
     
     initComponent: function() {

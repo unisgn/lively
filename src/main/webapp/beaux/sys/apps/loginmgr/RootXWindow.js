@@ -1,8 +1,7 @@
-﻿Ext.define('Beaux.sys.login.RootXWindow', {
-    extend: 'Beaux.sys.xserver.RootXWindow',
+﻿Ext.define('Beaux.sys.apps.loginmgr.RootXWindow', {
+    extend: 'Beaux.sys.lib.xserver.RootXWindow',
     requires: [
-        'Beaux.sys.login.LoginForm'
-        //'Alcedo.widget.Broadcast',
+        'Beaux.sys.apps.loginmgr.LoginForm'
     ],
 
     initComponent: function() {

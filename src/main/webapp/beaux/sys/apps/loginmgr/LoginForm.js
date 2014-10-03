@@ -1,9 +1,9 @@
-﻿Ext.define('Beaux.sys.login.LoginForm', {
+﻿Ext.define('Beaux.sys.apps.loginmgr.LoginForm', {
     extend: 'Ext.form.Panel',
     alias: 'widget.beaux.loginForm',
     
     requires: [
-        'Beaux.sys.desktop.Cassie'
+        'Beaux.sys.apps.cassie.Cassie'
     ],
     
     title: 'welcome login',

@@ -1,11 +1,11 @@
-﻿Ext.define('Beaux.sys.desktop.lib.XWindow', {
+﻿Ext.define('Beaux.sys.lib.cassie.XWindow', {
     extend: 'Ext.window.Window',
 
-    alternateClassName: ['Beaux.sys.XWindow'],
+    alternateClassName: ['Cassie.XWindow'],
     
     requires:[
-        'Beaux.sys.desktop.lib.WindowManager',
-        'Beaux.sys.desktop.Cassie'
+        'Beaux.sys.lib.cassie.WindowManager',
+        'Beaux.sys.lib.cassie.WindowArranger'
     ],
     
     /**
@@ -18,7 +18,7 @@
     /**
      * @override
      * @cfg
-     * set false to make transform css functionly properly;
+     * set false to make transform css function properly;
      */
     shadow: false,
 
@@ -34,7 +34,7 @@
     /**
      * @override
      * @cfg 
-     * set dymanic to make resize function with full dynamic contents;
+     * set dynamic to make resize function with full dynamic contents;
      */
     resizable: {
         dynamic: true
@@ -67,8 +67,7 @@
      * @private
      * windowManager
      */
-    wm: null,
-    
+
 
     /**
      * @property
@@ -83,36 +82,33 @@
      * the desktop
      *
      */
-    desktop: null,
-    desk: null,
-    
+
+//    constrainHeader: true,
+
     /**
      * @override
      * @private
      */
     initComponent: function(cfg) {
         var me = this;
-        
-        me.wm = me.getWindowManager();
-        me.desktop = me.getDesktop();
-        me.desk = me.getDesktop().getRootXWindow().getDesk();
+        me.renderTo = me.getDesktop().getRootXWindow().getDesk().getEl();
         me.callParent(cfg);
-        me.wm.registerWindow(me);
+        me.getWindowManager().registerWindow(me);
     },
 
     /**
      * @private
      */
     getWindowManager: function() {
-        return Beaux.sys.desktop.lib.WindowManager;
+        return Beaux.sys.lib.cassie.WindowManager;
     },
     getDesktop: function() {
-        return Beaux.sys.desktop.Cassie;
+        return Beaux.sys.apps.cassie.Cassie;
     },
 
     /**
      * @public
-     * @returns {Beaux.sys.application.Application}
+     * @returns {Beaux.sys.lib.Application}
      */
     getApplication: function() {
         return this.application;
@@ -170,17 +166,26 @@
 
     /**
      * @public
-     * @returns {Beaux.sys.desktop.lib.XWindow}
+     * @returns {Beaux.sys.lib.cassie.XWindow}
      */
     transform: function(_scale, _dx, _dy) {
         var me = this;
         if(!me.transformed) {
-            var _cls = 'XWindow-transform-' + me.id;
-            var _cssText = '.' + _cls + ' {-webkit-transform: matrix('+ _scale + ', 0, 0, ' + _scale + ', ' + _dx + ', ' + _dy + ');-moz-transform: matrix('+ _scale + ', 0, 0, ' + _scale + ', ' + _dx + 'px, ' + _dy + 'px)} ';
-            var _css = Ext.util.CSS.createStyleSheet(_cssText);
+            /*
+             * .XWindow-transform-${this.id} {
+             *     -webkit-transform: matrix(${_scale}, 0, 0, ${_scale}, ${_dx},   ${_dy});
+             *        -moz-transform: matrix(${_scale}, 0, 0, ${_scale}, ${_dx}px, ${_dy}px);
+             * }
+             *
+             */
+            var cls_id = me.getTransformClsId();
+            var cls_text =
+                ' {-webkit-transform: matrix('+ _scale + ', 0, 0, ' + _scale + ', ' + _dx + ', ' + _dy + ');' +
+                '   -moz-transform: matrix('+ _scale + ', 0, 0, ' + _scale + ', ' + _dx + 'px, ' + _dy + 'px);} ';
+            var css = Ext.util.CSS.createStyleSheet('.' + cls_id + cls_text, this.id);
             
             me.freeze();
-            me.addCls(_cls);
+            me.addCls(cls_id);
             me.transformed = true;    
         }
         return me;
@@ -193,11 +198,17 @@
     resetTransform: function() {
         var me = this;
         if(me.transformed) {
-            var _cls = 'XWindow-transform-' + me.id;
+            var _cls = me.getTransformClsId();
             me.removeCls(_cls);
+            Ext.util.CSS.removeStyleSheet(this.id);
             me.transformed = false;
             me.defreeze();
         }
+    },
+
+
+    getTransformClsId: function () {
+        return 'XWindow-transform-' + this.id;
     },
     
     
@@ -217,12 +228,13 @@
     afterRender: function() {
         var me = this;
         me.callParent();
-        var _wa = Beaux.sys.desktop.lib.WindowArranger;
+        var _wa = Beaux.sys.lib.cassie.WindowArranger;
         if(_wa.arranged) {
             _wa.resetWindows();
         }
     },
-    
+
+
     
     /**
      * @override
@@ -231,17 +243,17 @@
      */
     beforeDestroy: function() {
         var me = this;
-        me.wm.deregisterWindow(me);
+        me.getWindowManager().deregisterWindow(me);
         //me.desktop.getRootXWindow().getDesk().remove(me);        
         me.callParent();
     },
     
     onFreezeBodyClick: function() {
-        Beaux.sys.desktop.lib.WindowArranger.resetWindows();
+        Beaux.sys.lib.cassie.WindowArranger.resetWindows();
     },
 
     /**
-     * @override {@link Ext.window.Window.maximize()}
+     * @override {@link Ext.window.Window.#maximize}
      *
      *
      */
@@ -319,7 +331,7 @@
         _box.y = _deskRegion.y;
         me.setBox(_box, animate);
 
-    },
+    }
 
     /**
      * @override {@link Ext.panel.Panel.initSimpleDraggable()}

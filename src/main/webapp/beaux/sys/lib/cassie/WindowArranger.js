@@ -1,21 +1,13 @@
-
-Ext.define('Beaux.sys.desktop.lib.WindowArranger', {
+Ext.define('Beaux.sys.lib.cassie.WindowArranger', {
     singleton: true,
     requires:[
-        'Beaux.sys.desktop.Cassie'
+        'Beaux.sys.apps.cassie.Cassie'
     ],
-
-    /**
-     * @usedby {Beaux.sys.desktop.RootXWindow};
-     * @usedby {Beaux.sys.desktop.lib.WindowManager};
-     * @usedby {Beaux.sys.desktop.lib.XWindow};
-     *
-     */
 
     /**
      * @static
      * @final
-     * @brief the rate of the transformed window to its arranged cell;
+     * @brief the ratio of the transformed window to its arranged cell;
      */
     FIX_RATIO: 0.9,
 
@@ -40,14 +32,18 @@ Ext.define('Beaux.sys.desktop.lib.WindowArranger', {
         var me = this;
         var _winCount = me.getWindowManager().getWindows().length;
         if(_winCount > 0) {
-            return me[me.arranged ? 'resetWindows':'arrangeWindows']();
-        } else
-            return null;
+            //            return me[me.arranged ? 'resetWindows':'arrangeWindows']();
+            if (me.arranged) {
+                me.resetWindows();
+            } else {
+                me.arrangeWindows();
+            }
+        }
     },
 
     /**
      * @public
-     * @brief main algorithm to transform window to cell;
+     * @brief arrange windows to desk in cell grid;
      */
     arrangeWindows: function() {
         var me = this;
@@ -57,15 +53,15 @@ Ext.define('Beaux.sys.desktop.lib.WindowArranger', {
             var _desk = me.getDesk();
             var _deskRegion = me.getDeskRegion();
             var _regionRate = _desk.getWidth() / _desk.getHeight();
-            var _regionTable = me.makeRegionTable(_regionRate, _winCount);
+            var _cellGrid = me.makeCellGrid(_regionRate, _winCount);
 
-            var _cellWidth = _desk.getWidth() / _regionTable.columns;
-            var _cellHeight = _desk.getHeight() / _regionTable.rows;
+            var _cellWidth = _desk.getWidth() / _cellGrid.cols;
+            var _cellHeight = _desk.getHeight() / _cellGrid.rows;
 
             var i = 0;
             _wins.each(function(_win) {
-                var _cellX = i % _regionTable.columns;
-                var _cellY = Math.floor(i / _regionTable.columns);
+                var _cellX = i % _cellGrid.cols;
+                var _cellY = Math.floor(i / _cellGrid.cols);
 
                 // http://www.eleqtriq.com/wp-content/static/demos/2010/css3d/matrix2dExplorer.html
                 // http://dev.opera.com/articles/view/understanding-the-css-transforms-matrix/
@@ -76,7 +72,6 @@ Ext.define('Beaux.sys.desktop.lib.WindowArranger', {
                 var _r2 = _win.getHeight() / _cellHeight;
                 
                 var _ratio = (_r1 <= me.FIX_RATIO && _r2 <= me.FIX_RATIO) ? 1 : me.FIX_RATIO/Math.max(_r1, _r2);
-                
                 _win.transform(_ratio, _dx, _dy);
                 i++;
             });
@@ -108,14 +103,14 @@ Ext.define('Beaux.sys.desktop.lib.WindowArranger', {
      */    
 
     getDesk: function() {
-        return Beaux.sys.desktop.Cassie.getRootXWindow().getDesk();
+        return Beaux.sys.apps.cassie.Cassie.getRootXWindow().getDesk();
     },
     
     /**
      * @private
      */
     getWindowManager: function() {
-        return Beaux.sys.desktop.lib.WindowManager;
+        return Beaux.sys.lib.cassie.WindowManager;
     },
 
     /**
@@ -126,25 +121,30 @@ Ext.define('Beaux.sys.desktop.lib.WindowArranger', {
     },
 
     /**
+     * initial grid is {rows: 1, columns: 1}
+     * then we add a row or column depending on which will make the cell ratio more close to our golden ratio.
+     * until the given count less than cell count
      * @private
-     * @brief main algorithm to caculate cell arrangement for windows
+     * @brief calculate a cell grid by given (windows) ratio(=region.width / region.height) and (windows) count.
+
      */
-    makeRegionTable: function(_ratio_, _count_) {
-        var _gr = this.GOLDEN_RATIO;
-        var _rt = {rows:1, columns:1};
-        if(!_count_ || _count_ == 0 || _count_ == 1) {
-            return _rt;
+    makeCellGrid: function(_ratio, _count) {
+        var golden_ratio = this.GOLDEN_RATIO;
+        var rows = 1;
+        var cols = 1;
+        if(_count == 1) {
+            return {rows: 1, cols: 1};
         } else {
-            while(_count_ > _rt.rows * _rt.columns) {
-                var _r1 = (_rt.rows + 1) * _ratio_ / _rt.columns;
-                var _r2 = _rt.rows * _ratio_ / (_rt.columns + 1);
-                if (Math.abs(_gr - _r1) < Math.abs(_gr - _r2)) {
-                    _rt.rows++;
+            while(_count > rows * cols) {
+                var cell_ratio_if_add_row = (rows + 1) * _ratio / cols; // ((rows + 1) / cols) * _ratio
+                var cell_ratio_if_add_col = rows * _ratio / (cols + 1); // (rows / (cols + 1)) * _ratio
+                if (Math.abs(golden_ratio - cell_ratio_if_add_row) < Math.abs(golden_ratio - cell_ratio_if_add_col)) {
+                    rows++;
                 } else {
-                    _rt.columns++;
+                    cols++;
                 }
             }
         }
-        return _rt;
+        return {rows: rows, cols: cols};
     }
 });

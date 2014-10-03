@@ -1,7 +1,7 @@
 Ext.define('Jeeper.apps.account.FinancialAccount', {
-    extend: 'Beaux.sys.application.Application',
+    extend: 'Beaux.sys.lib.Application',
     statics: {
-        main: function(cfg) {
+        launch: function(cfg) {
             if(this.iid) {
                 this.instance.xwindow.toFront();
                 return null;

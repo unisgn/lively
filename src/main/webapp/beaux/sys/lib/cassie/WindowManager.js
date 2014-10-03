@@ -1,12 +1,11 @@
-Ext.define('Beaux.sys.desktop.lib.WindowManager', {
+Ext.define('Beaux.sys.lib.cassie.WindowManager', {
     singleton: true,
     mixins: {
         observable: 'Ext.util.Observable'
     },
     requires: [
-        'Ext.util.MixedCollection',
-        'Beaux.sys.desktop.lib.WindowArranger'
-    ], 
+        'Ext.util.MixedCollection'
+    ],
 
     
     /**
@@ -19,13 +18,11 @@ Ext.define('Beaux.sys.desktop.lib.WindowManager', {
      * @private
      * @property
      */
-    windowArranger: null,
-    
+
     constructor: function(config) {
         var me = this;
         me.windows = Ext.create('Ext.util.MixedCollection');
         
-        me.windowArranger = Beaux.sys.desktop.lib.WindowArranger;
         me.mixins.observable.constructor.call(this);
         
     },
@@ -37,21 +34,16 @@ Ext.define('Beaux.sys.desktop.lib.WindowManager', {
      *                        public interface
      ***************************************************************************
      * @public
-     * @returns {Beaux.sys.desktop.lib.XWindow}
+     * @returns {Beaux.sys.lib.cassie.XWindow}
      *
      */
     registerWindow: function(_win) {
-        var me = this;   
-        
-        me.windows.add(_win);
-        
-        return _win;
-        
+        return this.windows.add(_win);
     },
 
     /** 
      * @public
-     * @Returns {Ext.util.MixedCollection[Beaux.sys.desktop.lib.XWindow]}
+     * @Returns {Ext.util.MixedCollection[Beaux.sys.lib.cassie.XWindow]}
      */    
     getWindows: function() {
         return this.windows;
@@ -60,11 +52,10 @@ Ext.define('Beaux.sys.desktop.lib.WindowManager', {
     
     /** 
      * @public
-     *
+     * @returns {Beaux.sys.lib.cassie.XWindow}
      */
     deregisterWindow: function(_win) {
-        var me = this;
-        me.windows.remove(_win);
+        return this.windows.remove(_win);
     }
     
 });
