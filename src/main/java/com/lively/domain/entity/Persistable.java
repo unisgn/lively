@@ -15,6 +15,7 @@ public interface Persistable<ID extends Serializable> extends Serializable {
      */
     ID getId();
 
+
     /**
      * Returns if the {@code Persistable} is new or was persisted already.
      *

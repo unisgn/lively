@@ -4,19 +4,20 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
+import java.io.Serializable;
 
 /**
  * Created by franCiS on Sep 14, 2014.
  */
 @MappedSuperclass
-public abstract class AbstractEnhancedPersistable extends AbstractPersistable<Long> implements EnhancedPersistable {
+public abstract class AbstractEnhancedPersistable<PK extends Serializable> extends AbstractPersistable<PK> implements EnhancedPersistable {
 
 
     @Version
     private int version;
-    private boolean archived;
-    private boolean active;
-    private String resid;
+    private boolean archived = false;
+    private boolean active = true;
+    private String resid = this.getClass().getSimpleName() + "-" + String.valueOf(System.currentTimeMillis());
 
     protected AbstractEnhancedPersistable() { }
 

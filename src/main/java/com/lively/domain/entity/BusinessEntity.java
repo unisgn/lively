@@ -1,17 +1,27 @@
 package com.lively.domain.entity;
 
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
 /**
  * Created by franCiS on Sep 27, 2014.
  */
 
 @MappedSuperclass
-public abstract class MasterData extends AbstractEnhancedAuditable<Long> {
+public abstract class BusinessEntity extends AbstractEnhancedAuditable<Integer> {
+    @Column(nullable = false, unique = true, updatable = false, length = 64)
     private String number;
+
+    @Column(unique = true, length = 64)
     private String code;
+
+    @Column(unique = true, length = 64)
     private String name;
+
+    @Column(length = 64)
     private String alias;
+
     private String brief;
     private String searchText;
 
@@ -62,4 +72,5 @@ public abstract class MasterData extends AbstractEnhancedAuditable<Long> {
     public void setSearchText(String searchText) {
         this.searchText = searchText;
     }
+
 }

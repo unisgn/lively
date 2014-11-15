@@ -57,7 +57,7 @@
 
       If you have a webapp, and you dont want the eager loading in most cases just a few,
       and holding the transaction open is undesirable you can look into OpenEntityManagerInViewFilter.
-
+  -->
   <filter>
       <filter-name>OpenSessionInView</filter-name>
       <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
@@ -71,26 +71,26 @@
       <filter-name>OpenSessionInView</filter-name>
       <url-pattern>/rest/*</url-pattern>
   </filter-mapping>
-  -->
 
 
-  <filter>
-    <filter-name>openEntityManagerInViewFilter</filter-name>
-    <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
-    <init-param>
-      <param-name>singleSession</param-name>
-      <param-value>true</param-value>
-    </init-param>
-    <init-param>
-      <param-name>flushMode</param-name>
-      <param-value>AUTO</param-value>
-    </init-param>
-  </filter>
 
-  <filter-mapping>
-    <filter-name>openEntityManagerInViewFilter</filter-name>
-    <url-pattern>/res/*</url-pattern>
-  </filter-mapping>
+  <!--<filter>-->
+    <!--<filter-name>openEntityManagerInViewFilter</filter-name>-->
+    <!--<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>-->
+    <!--<init-param>-->
+      <!--<param-name>singleSession</param-name>-->
+      <!--<param-value>true</param-value>-->
+    <!--</init-param>-->
+    <!--<init-param>-->
+      <!--<param-name>flushMode</param-name>-->
+      <!--<param-value>AUTO</param-value>-->
+    <!--</init-param>-->
+  <!--</filter>-->
+
+  <!--<filter-mapping>-->
+    <!--<filter-name>openEntityManagerInViewFilter</filter-name>-->
+    <!--<url-pattern>/res/*</url-pattern>-->
+  <!--</filter-mapping>-->
 
   <!-- filter: set Chracter Encoding -->
   <filter>

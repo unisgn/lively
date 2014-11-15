@@ -14,9 +14,9 @@ public abstract class AbstractEnhancedAuditable<ID extends Serializable> extends
 
     @Version
     private int version;
-    private boolean archived;
-    private boolean active;
-    private String resid;
+    private boolean archived = false;
+    private boolean active = true;
+    private String resid = this.getClass().getSimpleName() + "-" + String.valueOf(System.currentTimeMillis());
 
 
 

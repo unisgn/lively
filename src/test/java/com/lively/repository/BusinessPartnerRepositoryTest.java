@@ -17,7 +17,7 @@ import java.util.List;
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class BusinessPartnerRepositoryTest {
     @Autowired
-    BusinessPartnerRepository bpRepo;
+//    BusinessPartnerRepository bpRepo;
 
     @Test
     public void testie() {

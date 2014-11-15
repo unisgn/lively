@@ -2,13 +2,22 @@
   <dictionary name="yinlan">
     <words>
       <w>auditable</w>
+      <w>beaux</w>
       <w>contextmenu</w>
+      <w>defreeze</w>
+      <w>deregister</w>
       <w>extjs</w>
+      <w>freezed</w>
       <w>glassfish</w>
+      <w>loginmgr</w>
+      <w>mixins</w>
       <w>oncontextmenu</w>
+      <w>persistable</w>
       <w>postgresql</w>
       <w>resid</w>
       <w>springmvc</w>
+      <w>xserver</w>
+      <w>xtype</w>
     </words>
   </dictionary>
 </component>

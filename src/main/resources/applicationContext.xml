@@ -23,15 +23,18 @@
 
   <context:annotation-config/>
   <!-- 自动扫描该路径所有注解 -->
-  <context:component-scan base-package="com.lively.service, com.lively.aop"/>
+  <context:component-scan base-package="com.lively.service.impl, com.lively.repository.impl"/>
   <tx:annotation-driven transaction-manager="transactionManager"/>
-  <jpa:repositories base-package="com.lively.repository" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager"/>
+  <!--<jpa:repositories base-package="com.lively.repository" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager"/>-->
+
+  <!-- 启动对@AspectJ注解的支持 -->
   <aop:aspectj-autoproxy />
+  <!-- 启用@AspectJ支持 -->
+  <bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/>
 
-
-
+<!--
   <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-    <!--<property name="dataSource" ref="dataSource"/>-->
+    &lt;!&ndash;<property name="dataSource" ref="dataSource"/>&ndash;&gt;
     <property name="jpaVendorAdapter">
       <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
         <property name="generateDdl" value="true"/>
@@ -53,27 +56,26 @@
 
   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
     <property name="entityManagerFactory" ref="entityManagerFactory"/>
-  </bean>
+  </bean>-->
 
   <bean class="org.dozer.spring.DozerBeanMapperFactoryBean"/>
 
-  <bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/>
 
-  <!--  <bean id="dataSource"
-        class="org.apache.commons.dbcp.BasicDataSource">
-    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-    <property name="url" value="jdbc:mysql://localhost:3306/nova"/>
-    <property name="username" value="root"/>
+
+
+
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    <property name="driverClassName" value="org.postgresql.Driver"/>
+    <property name="url" value="jdbc:postgresql://localhost:5432/nova"/>
+    <property name="username" value="demo"/>
     <property name="password" value="admin"/>
-  </bean>-->
-  <!--
-  <bean id="sessionFactory"
-      class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" destroy-method="destroy">
+  </bean>
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" destroy-method="destroy">
       <property name="dataSource" ref="dataSource" />
       <property name="namingStrategy" ref="improvedNamingStrategy" />
       <property name="hibernateProperties">
           <props>
-              <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+              <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
               <prop key="hibernate_show_sql">true</prop>
               <prop key="hibernate.format_sql">true</prop>
               <prop key="hibernate.hbm2ddl.auto">update</prop>
@@ -81,7 +83,7 @@
       </property>
       <property name="packagesToScan">
           <list>
-              <value>com.xeloop.xeloop</value>
+              <value>com.lively.domain.entity</value>
           </list>
       </property>
   </bean>
@@ -90,7 +92,8 @@
   <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
       <property name="sessionFactory" ref="sessionFactory" />
   </bean>
-  <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+
   <bean id="improvedNamingStrategy" class="org.hibernate.cfg.ImprovedNamingStrategy" />
-  -->
+
+  <!--<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />-->
 </beans>

@@ -6,5 +6,5 @@ package com.lively.domain.entity;
 public class Label extends AbstractEnhancedPersistable {
     private String label;
     private String resid;
-    private User creator;
+    private User owner;
 }
